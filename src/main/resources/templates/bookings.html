@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="navbar" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>bookings</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384- KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384- ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384- JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/webjars/bootstrap/5.1.3/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384- JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
+    <style>
+        .pre-scrollable{ height:500px; overflow-y: scroll;
+        }
+        h1 {
+            text-align: center;
+        }
+
+    </style>
+
+</head>
+<body>
+<div layout:fragment="content">
+    <h1> List of Reservation </h1>
+    <form  method="get" th:action="@{bookings}"> //creat getmapping
+        <div class="container mt-2 pre-scrollable">
+            <table class="table table-dark">
+                <thead>
+                <tr>
+
+                    <th scope="col">Booking Id</th>
+                    <th scope="col">Customer Name</th>
+                    <th scope="col">Sales Man Name </th>
+                    <th scope="col">Seat Letter</th>
+                    <th scope="col">Seat Number</th>
+                    <th scope="col">Date </th>
+                    <th scope="col"> </th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="booking:${bookings}">
+                    <td th:text="${booking.getId()}"></td>
+                    <td th:text="${booking.getCustomerName()}"></td>
+                    <td th:text="${booking.getSalesManName()}"></td>
+                    <td th:text="${booking.getSeatLetter()}+''+${booking.seatNum}"></td>
+                    <td th:text="${booking.getBookingDate()}"></td>
+                    <td>
+                    <td>
+                    <a class="btn btn-success" th:href="@{editBooking(id=${booking.id})}"> Edit</a>
+                    <a class="btn btn-danger" onClick="return confirm('Are you sure you want to delete the booking ?')" th:href="@{delete(id=${booking.id})}"> <!--cuando se de click aca hay que liberar la silla-->
+                        Delete</a>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+
+    </form>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="navbar" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>editBooking</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384- KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384- ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384- JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/webjars/bootstrap/5.1.3/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384- JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
+    <style>
+        .pre-scrollable{ height:500px; overflow-y: scroll;
+        }
+        h1 {
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="col-md-6 offset-3">
+        <form method="post" th:action="@{editBooking}">
+        <div>
+            <label>Booking Id</label> <input class="form-control" type="text" name="bookingId" th:value="${booking.id}" readonly> <span th:errors="${booking.id}"></span>
+        </div>
+        <div>
+            <label>Customer Name</label>
+            <input class="form-control" type="text" name="customerName" th:value="${booking.customerName}"> <span th:errors="${booking.customerName}"></span>
+        </div>
+            <div>
+                <label>SalesMan Name</label>
+                <input class="form-control" type="text" name="selectedName" th:value="${booking.salesManName}"> <span th:errors="${booking.salesManName}"></span>
+            </div>
+        <div>
+            <label>Current seat</label>
+           <input class="form-control" type="text" name="currentseat" th:value="${booking.getSeatLetter()}+''+${booking.seatNum}" readonly>
+        </div>
+        <div>
+            <label for="availableSeats">Available Seats:</label>
+            <select id="availableSeats" name="seatId" required>
+               <option th:each="seat : ${available}" th:value="${seat.id}" th:text="${seat.seatNum}+''+${seat.seatLetter}"></option>
+            </select><br><br>
+        </div>
+        <button type="submit" class="btn-primary" th:href="@{/bookings}" >Save</button>
+    </form>
+    </div>
+
+
+</div>
+
+</body>
+</html>
