@@ -55,7 +55,7 @@ public class BookingController {
     @Transactional
     public String saveBooking(Model model, @RequestParam("seatId") Long seatId, @RequestParam("selectedName") String selectedName, @RequestParam("customerName") String customerName, HttpSession session) throws ParseException {
 
-       // Long currentSeat = (Long) session.getAttribute("currentSeat");
+
             String desiredPattern = "yyyy-MM-dd";
             SimpleDateFormat dateFormat = new SimpleDateFormat(desiredPattern);
             Date currentDate = new Date();
@@ -84,7 +84,7 @@ public class BookingController {
 
     //editBooking
     @GetMapping("/editBooking")
-    public String editBookings (ModelMap model, Long id,
+    public String editBookings1 (ModelMap model, Long id,
                                 HttpSession session){
 
 
